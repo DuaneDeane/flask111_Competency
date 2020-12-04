@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+<div class="container">
+    {% for product in products %}
+    {% if product["active"] == True %}
+    <div class="page-header">
+        <h1>Name: {{ product["name"] }}</h1>
+        <p>Price: {{ product["price"] }}</p>
+        <p>Description: {{ product["description"] }}</p>
+        <p>Category: {{ product["category"] }}</p>
+        <p>Quantity: {{ product["quantity"] }}</p>
+        <p>Unique Tag: {{ product["unique_tag"] }}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
