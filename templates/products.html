@@ -1,9 +1,22 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 <div class="container">
+    <table class="table table-dark">
+        <thead class="thead-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Description</th>
+              <th scope="col">Category</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Unique Tag</th>
+              <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
     {% for product in products %}
     {% if product["active"] == True %}
-    <div class="page-header">
+    <!-- <div class="page-header">
         <h1>Name: {{ product["name"] }}</h1>
         <p>Price: {{ product["price"] }}</p>
         <p>Description: {{ product["description"] }}</p>
@@ -11,6 +24,27 @@
         <p>Quantity: {{ product["quantity"] }}</p>
         <p>Unique Tag: {{ product["unique_tag"] }}</p>
     </div>
-    {% endif %}
+    {% endif %} -->
+    {% for product in products %} 
+        {% if product["active"] %}
+        
+            {% set color = '' %}
+            {% if product["quantity"] <= 100 %}
+                {% set color = 'background-color:red;' %}
+            {% elif product["quantity"] <= 500 %}
+                {% set color = 'background-color:yellow;' %}
+            {% else %}
+                {% set color = '' %}
+            {% endif %}
+    <tr style='{{ color }}'>
+        <th scope="row">{{ product["id"] }}</th>
+        <td>{{ product["name"] }}</td>
+        <td>{{ product["category"] }}</td>
+        <td>{{ product["quantity"] }}</td>
+        <td>{{ product["price"] }}</td>
+        <td>{{ product["description"] }}</td>
+        <td>{{ product["unique_tag"] }}</td>
+        <td><form method="PUT" name="deactivate" id="{{ product['id'] }}">{{ wtf.quick_form(form) }}</form></td>
+    </tr>
 </div>
 {% endblock %}
