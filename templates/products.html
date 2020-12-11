@@ -47,4 +47,25 @@
         <td><form method="PUT" name="deactivate" id="{{ product['id'] }}">{{ wtf.quick_form(form) }}</form></td>
     </tr>
 </div>
+
+<div id="reviews" class="reviews">
+    {% for rev in product.reviews[:10] %}
+      <br>
+      <h3>{{ rev.summary }}</h3>
+
+      {% if "user" in session %}
+        {% if rev.review_id in favorite_reviews %}
+          <img src="/static/img/heart.png" class="heart" height="35" width="35" data-review-id={{ rev.review_id }}>
+        {% else %}
+          <img src="/static/img/heart-empty.jpg" class="heart" height="35" width="35" data-review-id={{ rev.review_id }}>
+        {% endif %}
+      {% endif %}
+
+      <p class="score">Score: {{ rev.score }}</p>
+      <p>{{ rev.review }}</p>
+      <br>
+      <hr>
+    {% endfor %}
+</div>
+
 {% endblock %}
