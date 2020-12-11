@@ -5,7 +5,7 @@
 from flask import g
 import sqlite3
 
-DATABASE = "HW3_db"
+DATABASE = "Competency_db"
 
 
 def get_db():
